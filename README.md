@@ -1,27 +1,92 @@
-# Tasks
+# Task and Person Management Application
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.16.
+## Project Description
 
-## Development server
+This project is a web application developed using **Angular 16** that allows managing tasks and associated persons. The application has the following features:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+1. Create tasks.
+2. List created tasks.
+3. Mark tasks as completed.
+4. Filter tasks by status (completed or pending).
+5. Assign persons to each task, with their full names, ages, and skills.
+6. Add and remove persons from tasks using buttons for these actions.
+7. Add and remove skills for each person using buttons for these actions.
+8. Implement a reactive form with validations, including validation of arrays and nested arrays.
 
-## Code scaffolding
+The graphical interface is designed following **Mobile First** principles to ensure a responsive experience.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Features
 
-## Build
+The application includes the following characteristics:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Task Management
 
-## Running unit tests
+- Create new tasks with name and due date.
+- List all created tasks.
+- Mark tasks as completed.
+- Filter tasks by status (completed or pending).
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Person Management
 
-## Running end-to-end tests
+- Assign persons to each task, including full name, age, and skills.
+- Add and remove persons from tasks using buttons.
+- Add and remove skills for each person.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### Validations
 
-## Further help
+- Validations in reactive forms, ensuring that fields are required and meet the established requirements (such as age greater than 18 and non-empty skills).
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Technologies Used
+
+- **Frontend**: Angular 16
+- **State Management**: Angular Services or NgRx (optional)
+- **REST API**: Optional consumption of JSONPlaceholder to obtain and store data.
+
+## Project Structure
+
+The application is organized into components that allow easy scalability:
+
+- `task.service.ts`: Main component that handles task logic.
+- `task-list.component.ts`: Component to list tasks and associates.
+- `task-create.component.ts`: Component to create task.
+
+```bash 
+└── 📁src
+        └── 📁app
+            └── 📁models
+                └── task.model.ts
+            └── 📁tasks
+                └── 📁task-create
+                    └── task-create.component.css
+                    └── task-create.component.html
+                    └── task-create.component.spec.ts
+                    └── task-create.component.ts
+                └── 📁task-list
+                    └── task-list.component.css
+                    └── task-list.component.html
+                    └── task-list.component.spec.ts
+                    └── task-list.component.ts
+                └── task.service.spec.ts
+                └── task.service.ts
+                └── tasks-routing.module.ts
+                └── tasks.module.ts
+            └── app-routing.module.ts
+            └── app.component.css
+            └── app.component.html
+            └── app.component.spec.ts
+            └── app.component.ts
+            └── app.module.ts
+
+```
+
+## Installation
+
+To run the application locally, follow these steps:
+
+1. install package:
+   ```bash   
+   npm install
+
+2. run proyect:
+   ```bash
+    neg serve
