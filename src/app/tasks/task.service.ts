@@ -52,6 +52,15 @@ export class TaskService {
     }
   }
 
+  setPendingTask(taskId: number): void {
+    const task = this.tasks.find(t => t.id === taskId);
+    if (task) {
+      task.status = 'pending';
+      this.updateLocalStorage();
+      this.tasksSubject.next(this.tasks);
+    }
+  }
+
   addPersonToTask(taskId: number, fullName: string, age: number): Person | null {
     const task = this.tasks.find(t => t.id === taskId);
     if (task) {

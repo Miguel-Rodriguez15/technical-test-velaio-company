@@ -1,2 +1,15 @@
+<div class="hamburger-container">
+  <button class="hamburger-button" (click)="toggleSidebar()">☰</button>
 
-<router-outlet></router-outlet>
+  <nav class="sidebar" [class.open]="isSidebarOpen">
+    <h2>Administracion de tareas</h2>
+    <ul>
+      <li><a routerLink="/tasks/create" routerLinkActive="active" (click)="closeSidebar()"> Crear tareas</a></li>
+      <li><a routerLink="/tasks/list" routerLinkActive="active" (click)="closeSidebar()">Listado de tareas</a></li>
+    </ul>
+  </nav>
+
+  <div class="main-content" [class.overlay]="isSidebarOpen" (click)="closeSidebar()">
+    <router-outlet></router-outlet>
+  </div>
+</div>

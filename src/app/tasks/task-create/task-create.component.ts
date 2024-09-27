@@ -6,6 +6,8 @@ import { Task } from 'src/app/models/task.model';
 @Component({
   selector: 'app-create-task',
   templateUrl: './task-create.component.html',
+  styleUrls: ['./task-create.component.css']
+
 })
 export class TaskCreateComponent implements OnInit {
   taskForm: FormGroup;

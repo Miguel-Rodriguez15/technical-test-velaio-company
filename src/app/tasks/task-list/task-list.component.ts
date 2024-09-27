@@ -46,8 +46,15 @@ export class TaskListComponent implements OnInit {
     this.applyFilter();
   }
 
-  completeTask(taskId: number): void {
-    this.taskService.completeTask(taskId);
+  completeTask(taskId: number, event: Event): void {
+    const isChecked = (event.target as HTMLInputElement).checked;
+
+    if (isChecked) {
+      this.taskService.completeTask(taskId);
+    } else {
+      this.taskService.setPendingTask(taskId);
+    }
+
     this.applyFilter();
   }
 

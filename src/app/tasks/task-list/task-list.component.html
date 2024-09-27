@@ -1,46 +1,55 @@
-<h2>Task List</h2>
+<h2 class="task-list-title animate-from-top">Listado de tareas</h2>
 
-<div>
-  <button (click)="setFilter('all')">All</button>
-  <button (click)="setFilter('pending')">Pending</button>
-  <button (click)="setFilter('completed')">Completed</button>
+<div class="task-filter-buttons animate-from-top">
+  <button class="filter-btn" (click)="setFilter('all')">Todas </button>
+  <button class="filter-btn" (click)="setFilter('pending')">Pendiente</button>
+  <button class="filter-btn" (click)="setFilter('completed')">Completadas</button>
 </div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Due Date</th>
-      <th>Personas asociadas a la tarea</th>
+<div class="table-container">
+  <table>
+    <thead>
+      <tr>
+        <th>Nombre de la tarea</th>
+        <th>Fecha de creacion</th>
+        <th>Personas asociadas a la tarea</th>
+        <th>Completar tareas</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let task of filteredTasks">
+        <td>{{ task.name }}</td>
+        <td>{{ task.dueDate | date }}</td>
+        <td>
+          <ul>
+            <li *ngFor="let person of task.people">
+              {{ person.fullName }}
+            </li>
+          </ul>
+        </td>
+        <td>
+          <div class="container">
+            <div class="checkboxes">
+              <div class="check">
+                <input type="checkbox"
+                       [checked]="task.status === 'completed'"
+                       (change)="completeTask(task.id, $event)"
+                       id="check-{{ task.id }}">
+                <label for="check-{{ task.id }}">
+                  <div class="box">
+                    <i class="icon-check">✔</i>
+                  </div>
+                </label>
+              </div>
+            </div>
+          </div>
+        </td>
 
-      <th>Completed</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let task of filteredTasks">
-      <td>{{ task.name }}</td>
-      <td>{{ task.dueDate | date }}</td>
-      <td>
-        <ul>
-          <li *ngFor="let person of task.people">
-            {{ person.fullName }}
-          </li>
-        </ul>
-      </td>
-      <td>
-        <input type="checkbox"
-               [checked]="task.status === 'completed'"
-               (change)="completeTask(task.id)">
-      </td>
-      <td>
-        <button (click)="viewTask(task.id)">View</button>
-        <button (click)="editTask(task.id)">Edit</button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
-<div *ngIf="filteredTasks.length === 0">
+<div class="no-tasks-message" *ngIf="filteredTasks.length === 0">
   No tasks available.
 </div>
