@@ -1,1 +1,46 @@
-<p>task-list works!</p>
+<h2>Task List</h2>
+
+<div>
+  <button (click)="setFilter('all')">All</button>
+  <button (click)="setFilter('pending')">Pending</button>
+  <button (click)="setFilter('completed')">Completed</button>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Due Date</th>
+      <th>Personas asociadas a la tarea</th>
+
+      <th>Completed</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let task of filteredTasks">
+      <td>{{ task.name }}</td>
+      <td>{{ task.dueDate | date }}</td>
+      <td>
+        <ul>
+          <li *ngFor="let person of task.people">
+            {{ person.fullName }}
+          </li>
+        </ul>
+      </td>
+      <td>
+        <input type="checkbox"
+               [checked]="task.status === 'completed'"
+               (change)="completeTask(task.id)">
+      </td>
+      <td>
+        <button (click)="viewTask(task.id)">View</button>
+        <button (click)="editTask(task.id)">Edit</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div *ngIf="filteredTasks.length === 0">
+  No tasks available.
+</div>

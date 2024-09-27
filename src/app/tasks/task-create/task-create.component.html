@@ -1,1 +1,64 @@
-<p>task-create works!</p>
+<form [formGroup]="taskForm" (ngSubmit)="onSubmit($event)">
+  <div>
+    <label for="name">Task Name:</label>
+    <input id="name" formControlName="name" required />
+    <div *ngIf="taskForm.get('name')?.invalid && (taskForm.get('name')?.touched || taskForm.get('name')?.dirty)">
+      <small *ngIf="taskForm.get('name')?.errors?.['required']">Name is required.</small>
+      <small *ngIf="taskForm.get('name')?.errors?.['minlength']">Name must be at least 5 characters long.</small>
+    </div>
+  </div>
+
+  <div>
+    <label for="dueDate">Due Date:</label>
+    <input id="dueDate" type="date" formControlName="dueDate" />
+    <div *ngIf="taskForm.get('dueDate')?.invalid && (taskForm.get('dueDate')?.touched || taskForm.get('dueDate')?.dirty)">
+      <small *ngIf="taskForm.get('dueDate')?.errors?.['required']">Due Date is required.</small>
+    </div>
+  </div>
+
+  <div formArrayName="people">
+    <h3>Associated People</h3>
+    <div *ngFor="let person of people.controls; let i = index" [formGroupName]="i">
+      <div>
+        <label for="fullName">Full Name:</label>
+        <input formControlName="fullName" />
+        <div *ngIf="person.get('fullName')?.invalid && (person.get('fullName')?.touched || person.get('fullName')?.dirty)">
+          <small *ngIf="person.get('fullName')?.errors?.['required']">Full Name is required.</small>
+          <small *ngIf="person.get('fullName')?.errors?.['minlength']">Full Name must be at least 5 characters long.</small>
+        </div>
+      </div>
+
+      <div>
+        <label for="age">Age:</label>
+        <input formControlName="age" type="number" />
+        <div *ngIf="person.get('age')?.invalid && (person.get('age')?.touched || person.get('age')?.dirty)">
+          <small *ngIf="person.get('age')?.errors?.['required']">Age is required.</small>
+          <small *ngIf="person.get('age')?.errors?.['min']">Must be at least 18 years old.</small>
+        </div>
+      </div>
+
+      <div formArrayName="skills">
+        <h4>Skills</h4>
+        <div *ngFor="let skill of getSkills(i).controls; let j = index">
+          <div [formGroupName]="j">
+            <label for="skillName">Skill Name:</label>
+            <input id="skillName" formControlName="name" required />
+            <button type="button" (click)="removeSkill(i, j)">Remove Skill</button>
+          </div>
+        </div>
+        <button type="button" (click)="addSkill(i)">Add Skill</button>
+      </div>
+
+      <button type="button" (click)="removePerson(i)">Remove Person</button>
+    </div>
+  </div>
+
+  <button type="button" (click)="addPerson()">Add Person</button>
+
+  <button type="submit" [disabled]="taskForm.invalid">Create Task</button>
+
+  <!-- Mensaje de error global -->
+  <div *ngIf="taskForm.invalid && isSubmitting">
+    <p class="error">Por favor, revisa los errores en el formulario.</p>
+  </div>
+</form>

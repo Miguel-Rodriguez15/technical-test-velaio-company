@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TasksModule } from './tasks/tasks.module';
-import { PeopleModule } from './people/people.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -14,7 +14,7 @@ import { PeopleModule } from './people/people.module';
     BrowserModule,
     AppRoutingModule,
     TasksModule,
-    PeopleModule
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
