@@ -100,7 +100,7 @@ createSkill(): FormGroup {
     }
 }
 
-private findDuplicateNames(people: any[]): string[] {
+ findDuplicateNames(people: any[]): string[] {
     const names = people.map(person => person.fullName);
     const duplicates: string[] = [];
     const uniqueNames = new Set();

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Task, Person, Skill } from '../models/task.model';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -96,6 +96,7 @@ export class TaskService {
   }
 
   getTasks(): Observable<Task[]> {
-    return this.tasksSubject.asObservable();
+    const tasks = JSON.parse(localStorage.getItem('tasks') || '[]');
+    return of(tasks);
   }
 }

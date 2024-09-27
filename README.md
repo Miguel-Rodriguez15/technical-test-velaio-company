@@ -89,4 +89,7 @@ To run the application locally, follow these steps:
 
 2. run proyect:
    ```bash
-    neg serve
+    ng serve
+3. run test:
+   ```bash
+    ng test

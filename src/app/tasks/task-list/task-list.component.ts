@@ -58,12 +58,4 @@ export class TaskListComponent implements OnInit {
     this.applyFilter();
   }
 
-
-  viewTask(taskId: number): void {
-    console.log(`Viewing task with ID: ${taskId}`);
-  }
-
-  editTask(taskId: number): void {
-    console.log(`Editing task with ID: ${taskId}`);
-  }
 }
