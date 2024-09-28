@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 import { TaskService } from '../task.service';
 import { Task } from 'src/app/models/task.model';
 
@@ -36,7 +36,7 @@ export class TaskCreateComponent implements OnInit {
         fullName: fullNameControl,
         age: ageControl,
         skills: skillsArray
-    });
+    }, { validators: this.atLeastOneSkillValidator() });
 
     this.people.push(personGroup);
 }
@@ -130,4 +130,13 @@ createSkill(): FormGroup {
 
     localStorage.setItem('tasks', JSON.stringify(tasks));
   }
+
+    atLeastOneSkillValidator(): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: boolean } | null => {
+        const skillsArray = control.get('skills') as FormArray;
+        const hasAtLeastOneSkill = skillsArray && skillsArray.length > 0 && skillsArray.controls.some(skill => skill.get('name')?.value);
+
+        return hasAtLeastOneSkill ? null : { 'atLeastOneSkill': true };
+    };
+}
 }
